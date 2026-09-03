@@ -18,7 +18,7 @@ async function logData() {
             <div class="product-info">
                 <p class="category">${item.category}</p>
                 <p class="product-name">${item.name}</p>
-                <p class="price">${item.price}</p>
+                <p class="price">$ ${Number(item.price).toFixed(2)}</p>
             </div>
         </div>`;
 
