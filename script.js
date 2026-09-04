@@ -4,28 +4,48 @@ async function getData() {
     return data;
 }
 
-const productContainer = document.querySelector('.products-container');
+const productsList = document.querySelector('.products-list');
+
 
 async function logData() {
     const data = await getData();
 
-    data.forEach(item => {
-        productContainer.innerHTML += `<div class="product-card">
+    const cardsHTML = data.map((item, index) => `
+        <div class="product-card">
             <div class='img-wrapper'>
                 <img src='${item.image.desktop}' alt='${item.name}'>
+                <button class="add-to-cart-btn" aria-controls='product-info-${index}'>
+                    <img src='./assets/images/icon-add-to-cart.svg' alt='add to cart button'>
+                    Add to Cart
+                </button>
             </div>
-            <button class="add-to-cart-btn">Add to Cart</button>
-            <div class="product-info">
+            
+            <div class="product-info" id='product-info-${index}'>
                 <p class="category">${item.category}</p>
                 <p class="product-name">${item.name}</p>
                 <p class="price">$ ${Number(item.price).toFixed(2)}</p>
             </div>
-        </div>`;
+        </div>`
+    ).join('');
 
-        console.log(item)
+    productsList.innerHTML = cardsHTML;
+
+    const addToCartBtn = document.querySelectorAll('.add-to-cart-btn');
+
+    addToCartBtn.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('aria-controls');
+            const infoContainer = document.getElementById(targetId);
+            const name = infoContainer.querySelector('.product-name').textContent;
+            const price = infoContainer.querySelector('.price').textContent;
+
+            console.log({name, price});
+        })
     })
-
-    //console.log(data.length)
 }
 
 logData()
+
+
+
+
