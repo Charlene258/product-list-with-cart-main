@@ -19,7 +19,6 @@
 }
 
 body {
-  min-width: 375px;
   background-color: var(--Rose-100);
   display: flex;
   flex-direction: column;
@@ -160,7 +159,6 @@ h1 {
 
 .order-summary {
   grid-column: 3;
-  /* height: 600px; */
   align-self: start;
   border-radius: 10px;
   background-color: var(--Rose-50);
@@ -295,6 +293,7 @@ footer {
 
   .order-summary {
     width: 400px;
+    align-self: center;
   }
 }
 
